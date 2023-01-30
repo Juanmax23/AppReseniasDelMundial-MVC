@@ -1,0 +1,47 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "VisualizarReseñasDeUnPeriodista";
+}
+
+<h1><u>Visualizar reseñas de @ViewBag.Nombre</u></h1>
+
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+
+
+@if (ViewBag.VerReseñas != null && ViewBag.VerReseñas.Count > 0)
+{
+    {
+        <table class="table">
+            <tr>
+                <th>Fecha del partido</th>
+                <th>Nombre del grupo</th>
+                <th>Selecciones enfrentadas</th>
+                <th>Título de la reseña</th>
+                <th>Reseña</th>
+            </tr>
+            @foreach (Resenia r in ViewBag.VerReseñas)
+            {
+                <tr>
+                    <td>@r.Partido.FechaYHora</td>
+                    <td>@r.Partido.NombreDelGrupo()</td>
+                    <td>@r.Partido.Seleccion1.NombrePais  vs @r.Partido.Seleccion2.NombrePais</td>
+                    <td>@r.Título</td>
+                    <td>@r.Contenido</td>
+                </tr>
+            }
+        </table>
+        <br />
+    }
+}
+else
+{
+    <h2>Aún no ha hecho reseñas.</h2>
+}

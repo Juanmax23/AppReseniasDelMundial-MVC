@@ -1,0 +1,247 @@
+﻿@using Dominio;
+@model Partido;
+@{
+    ViewData["Title"] = "InfoPartidoFinalizado";
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+@if (ViewBag.Error == null)
+{
+    <div class="container-fluid  text-center">
+
+        <h1 class="text text-success text-center">Partido  Finalizado</h1>
+        <br />
+        <h4> @Model.NombreDelGrupo()</h4>
+        <br />
+        <h4>Fecha: @Model.FechaYHora</h4>
+
+
+        @if (Model != null && Model is FaseDeGrupos)
+        {
+            FaseDeGrupos f = Model as FaseDeGrupos;
+
+            <br />
+            <h3 class="text-left"> @f.Seleccion1.NombrePais </h3>
+            <br />
+            <table class="table table-striped border border-succes">
+                <tr>
+                    <th>Incidencia</th>
+                    <th>Jugador</th>
+                    <th>Minuto</th>
+                </tr>
+
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Gol") && i.Jugador.Pais.Equals(f.Seleccion1.Pais))
+                    {
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+                    }
+
+                }
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Tarjeta amarilla") && i.Jugador.Pais.Equals(f.Seleccion1.Pais))
+                    {
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+                    }
+
+                }
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Tarjeta roja") && i.Jugador.Pais.Equals(f.Seleccion1.Pais))
+                    {
+
+
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+
+                    }
+                }
+            </table>
+            <h3 class="text-left">@f.Seleccion2.NombrePais</h3><br />
+            <table class="table table-striped border border-succes">
+                <tr>
+                    <th>Incidencia</th>
+                    <th>Jugador</th>
+                    <th>Minuto</th>
+                </tr>
+
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Gol") && i.Jugador.Pais.Equals(f.Seleccion2.Pais))
+                    {
+
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+
+                    }
+
+                }
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Tarjeta amarilla") && i.Jugador.Pais.Equals(f.Seleccion2.Pais))
+                    {
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+                    }
+
+                }
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Tarjeta roja") && i.Jugador.Pais.Equals(f.Seleccion2.Pais))
+                    {
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+                    }
+
+                }
+            </table>
+
+            <h3 class="text-success text-right">Resultado @f.Resultado</h3>
+
+        }
+        else if (Model != null && Model is FaseEliminatoria)
+        {
+            FaseEliminatoria f = Model as FaseEliminatoria;
+
+
+            <h3 class="text-left">  @f.Seleccion1.NombrePais</h3>
+            <br />
+            <table class="table table-striped">
+                <tr>
+                    <th>Incidencia</th>
+                    <th>Jugador</th>
+                    <th>Minuto</th>
+                </tr>
+
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Gol") && i.Jugador.Pais.Equals(f.Seleccion1.Pais))
+                    {
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+                    }
+
+                }
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Tarjeta amarilla") && i.Jugador.Pais.Equals(f.Seleccion1.Pais))
+                    {
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+                    }
+
+                }
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Tarjeta roja") && i.Jugador.Pais.Equals(f.Seleccion1.Pais))
+                    {
+
+
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+
+                    }
+                }
+            </table>
+            <h3 class="text-left">@f.Seleccion2.NombrePais</h3><br />
+            <table class="table table-striped">
+                <tr>
+                    <th>Incidencia</th>
+                    <th>Jugador</th>
+                    <th>Minuto</th>
+                </tr>
+
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Gol") && i.Jugador.Pais.Equals(f.Seleccion2.Pais))
+                    {
+
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+
+                    }
+
+                }
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Tarjeta amarilla") && i.Jugador.Pais.Equals(f.Seleccion2.Pais))
+                    {
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+                    }
+
+                }
+                @foreach (Incidencia i in f.Incidencias)
+                {
+                    if (i.Inc.Equals("Tarjeta roja") && i.Jugador.Pais.Equals(f.Seleccion2.Pais))
+                    {
+                        <tr>
+                            <td>@i.Inc</td>
+                            <td>@i.Jugador.Nombre</td>
+                            <td>@i.Minuto</td>
+                        </tr>
+                    }
+
+                }
+            </table>
+
+            <h3 class="text-success text-right">Resultado @f.Resultado</h3>
+
+        }
+        else
+        {
+            <div class="alert-danger">El partido finalizado no existe.</div>
+        }
+
+    </div>
+
+}
+
+
+
+
+<br>
+
+<a href="~/Partido/FinalizarPartido" class="btn btn-info">Volver</a>

@@ -1,0 +1,71 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "ListarSeleccionesConSusJugadores";
+}
+
+
+<br />
+<h1><u>Selecciones de Qatar 2022</u></h1>
+<br />
+
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+
+
+@if (ViewBag.ListadoSeleccion != null && ViewBag.ListadoSeleccion.Count > 0)
+{
+    <div class="accordion">
+
+        @foreach (Seleccion s in ViewBag.ListadoSeleccion)
+        {
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <button class="btn" data-toggle="collapse" data-target="#@s.Pais.Codigo">
+                            @s.NombrePais
+                        </button>
+                    </h5>
+                </div>
+                <div id="@s.Pais.Codigo" class="collapse show" data-parent="#accordion">
+
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>N° Camiseta</th>
+                                <th>Altura</th>
+                                <th>Pie Habil</th>
+                                <th>Posicion</th>
+
+                            </tr>
+
+                            @foreach (Jugador j in s.JugadoresSeleccion)
+                             {
+                                <tr>
+                                    <td>@j.Nombre</td>
+                                    <td>@j.NumeroCamiseta</td>
+                                    <td>@j.Altura</td>
+                                    <td>@j.PieHabil</td>
+                                    <td>@j.Puesto</td>
+
+
+                                </tr>
+                             }
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <br />
+         }
+    </div>
+}

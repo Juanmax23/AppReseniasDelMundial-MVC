@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Registrarse";
+}
+
+<h1><u>Registrarse como periodista</u></h1>
+<br />
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+}
+
+<div class="alert alert-danger" role="alert" id="errorUsuario"></div>
+
+
+
+@if (ViewBag.Exito != null)
+{
+    <div class="alert alert-success" role="alert">@ViewBag.Exito</div>
+}
+
+<form method="post" action="~/Usuario/ProcesarAltaPeriodista">
+
+    <div class="form-group">
+        <label for="nombre">Nombre </label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="@ViewBag.nombre" placeholder="Ingrese nombre">
+    </div>
+
+    <div class="form-group">
+        <label for="apellido"> Apellido</label>
+        <input type="text" class="form-control" id="apellido" name="apellido" value="@ViewBag.apellido" placeholder="Ingrese  apellido">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="Ingrese email" value="@ViewBag.email">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" class="form-control" id="password1" name="password" placeholder="Ingrese contraseña" value="@ViewBag.pass" />
+
+    </div>
+
+    <div class="form-group">
+        <label for="password2">Repetir Contraseña</label>
+        <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirmacion de contraseña" value="@ViewBag.pass2">
+
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Crear Cuenta" />
+</form>
+
+
+
+

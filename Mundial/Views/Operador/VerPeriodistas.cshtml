@@ -1,0 +1,28 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "VerPeriodistas";
+}
+
+<h1><u>Lista de periodistas registrados<u></h1>
+
+
+<table class="table table-striped">
+    <tr>
+        <td>Id</td>
+        <td>Periodista</td>
+        <td>Email</td>
+        <td></td>
+
+    </tr>
+    @foreach (Periodista p in ViewBag.listaPeriodistas)
+    {
+        <tr>
+            <td>@p.Id</td>
+            <td>@p.Apellido, @p.Nombre</td>
+            <td>@p.Email</td>
+            <td><a href="~/Operador/VisualizarReseñasDeUnPeriodista?email=@p.Email" class="btn btn-primary">Ver Reseñas</a></td>
+        </tr>
+    }
+</table>
+

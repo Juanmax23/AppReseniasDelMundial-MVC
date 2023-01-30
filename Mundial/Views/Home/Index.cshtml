@@ -1,0 +1,22 @@
+﻿@using Dominio;
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div>
+    @if (Context.Session.GetString("usuario") != null)
+    {
+
+        <h1>Welcome @Context.Session.GetString("usuario")</h1>
+    }
+    else
+    {
+        <h1><u>Mundial Qatar 2022</u></h1>
+        <br />
+        <br />
+        <h3>Inicia sesión para acceder al menú</h3>
+    }
+
+</div>

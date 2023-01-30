@@ -1,0 +1,53 @@
+﻿@using Dominio
+@{
+    ViewData["Title"] = "PartidosConTarjetaRojaDeUnPeriodita";
+}
+
+<h1><u>Buscar partidos con tarjeta roja que reseñó un periodista</u></h1>
+<br />
+
+<form action="~/Partido/BuscarPartidosConTarjetaRojaQueReseñoElPeriodista" method="get" class="form-inline">
+
+    <input type="text" placeholder="Ingrese el gmail del periodista" class="form-control" name="email" /> &nbsp;&nbsp;
+
+    <input type="submit" value="Buscar" class="btn btn-info mt-3 mt-sm-0" /> &nbsp;&nbsp;
+    <a href="~/Partido/PartidosConTarjetaRojaDeUnPeriodita" class="btn btn-info mt-3 mt-sm-0">Limpiar Lista</a>
+</form>
+
+<br />
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+
+@if (ViewBag.ListaPartidos != null && ViewBag.ListaPartidos.Count > 0)
+{
+    <table class="table table-striped ">
+        <tr>
+            <th>Seleccion 1</th>
+            <th>Seleccion 2</th>
+            <th>Fecha Partido</th>
+            <th>Rojas Seleccion 1</th>
+            <th>Rojas Seleccion 2</th>
+
+        </tr>
+
+        @foreach (Partido p in ViewBag.ListaPartidos)
+        {
+            <tr>
+                <td>@p.Seleccion1.NombrePais</td>
+                <td> @p.Seleccion2.NombrePais</td>
+                <td>@p.FechaYHora</td>
+                <td>@p.CalcularGolesPorSeleccion(@p.Seleccion1)</td>
+                <td>@p.CalcularGolesPorSeleccion(@p.Seleccion2)</td>
+
+
+
+            </tr>
+        }
+    </table>
+}

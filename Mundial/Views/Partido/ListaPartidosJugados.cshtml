@@ -1,0 +1,49 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "ListaPartidosJugados";
+}
+
+
+<h1 class="text-center"><u>Partidos de la Copa Mundial FIFA Qatar 2022</u></h1>
+<br />
+<br />
+
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+
+@if (ViewBag.ListaPartidosJugados != null && ViewBag.ListaPartidosJugados.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <td><b>Fecha</b></td>
+            <td><b>Selección 1</b></td>
+            <td><b>Selección 2</b></td>
+            <td><b>Estado</b></td>
+        </tr>
+
+        @foreach (Partido p in ViewBag.ListaPartidosJugados)
+        {
+    <tr>
+        <td>@p.FechaYHora</td>
+        <td>@p.Seleccion1.NombrePais</td>
+        <td>@p.Seleccion2.NombrePais</td>
+        @if (p.Finalizado == true){
+            <td>Finalizado</td>
+        }
+        @if (p.Finalizado == false){
+            <td>En curso</td>
+        }
+
+    </tr>
+        }
+    </table>
+
+}
+

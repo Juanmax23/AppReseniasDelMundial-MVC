@@ -1,0 +1,68 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "VisualizarPartidosJugadosEntreDosFechas";
+}
+
+<h1><u>Partidos jugados entre dos fechas</u></h1>
+<br>
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<form action="~/Partido/BuscarPartidosJugadosEntreDosFechas" method="get" class="form-inline">
+    <label for="fecha" class="col-form-label">Fecha 1</label>&nbsp;&nbsp;
+    <input type="date" class="form-control" name="fecha1" placeholder="Seleccione la fecha"> &nbsp;&nbsp;
+    <label for="fecha" class="col-form-label">Fecha 2</label>&nbsp;&nbsp;
+    <input type="date" class="form-control" name="fecha2" placeholder="Seleccione la otra fecha"> &nbsp;&nbsp;
+    <input type="submit" value="Buscar" class="btn btn-info mt-3 mt-sm-0" />&nbsp;&nbsp;
+    <a href="~/Partido/VisualizarPartidosJugadosEntreDosFechas" class="btn btn-info mt-3 mt-md-0">Limpiar Lista</a>
+</form>
+
+
+
+@if (ViewBag.PartidoEntreDosFechas != null && ViewBag.PartidoEntreDosFechas.Count > 0)
+{
+    <div class="conteiner">
+        <table class="table table-striped">
+            <tr>
+                <th>Fecha </th>
+                <th>Selecion 1</th>
+                <th>Goles S1</th>
+                <th>T.Amarillas S1</th>
+                <th>T.Rojas S1</th>
+                <th>Seleccion 2</th>
+                <th>Goles S2</th>
+                <th>T.Amarillas S2</th>
+                <th>T.Rojas S2</th>
+
+            </tr>
+            @foreach (Partido p in ViewBag.PartidoEntreDosFechas)
+            {
+        <tr>
+            <td>@p.FechaYHora</td>
+            <td>@p.Seleccion1.NombrePais</td>
+            <td>@p.CalcularGolesPorSeleccion(p.Seleccion1)</td>
+            <td>@p.CalcularAmarillasPorSeleccion(p.Seleccion1)</td>
+            <td>@p.CalcularRojasPorSeleccion(p.Seleccion1)</td>
+            <td>@p.Seleccion2.NombrePais</td>
+            <td>@p.CalcularGolesPorSeleccion(p.Seleccion2)</td>
+            <td>@p.CalcularAmarillasPorSeleccion(p.Seleccion2)</td>
+            <td>@p.CalcularRojasPorSeleccion(p.Seleccion2)</td>
+
+        </tr>
+            }
+        </table>
+
+
+    </div>
+
+}
+
+
+
+
+

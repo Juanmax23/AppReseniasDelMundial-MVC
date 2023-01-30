@@ -1,0 +1,37 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "Finalizar partido";
+}
+
+@if (ViewBag.Exito != null)
+{
+    <div class="alert-success">@ViewBag.Exito</div>
+}
+
+<h1><u>Finalizar partido</u></h1>
+
+@if (ViewBag.ListadoPartidosSinFinalizar != null && ViewBag.ListadoPartidosSinFinalizar.Count > 0)
+{
+    <table class="table table-striped">
+        <tr>
+            <td>ID</td>
+            <td>Partido</td>
+            <td></td>
+        </tr>
+
+        @foreach (Partido p in ViewBag.ListadoPartidosSinFinalizar)
+        {
+            <tr>
+                <td>@p.Id</td>
+                <td>@p.Seleccion1.NombrePais vs @p.Seleccion2.NombrePais</td>
+                <td><a href="~/Partido/FinalizarPartidoPorID?idPartido=@p.Id" class="btn btn-danger text-right">Finalizar partido</a></td>
+            </tr>
+         }
+    </table>
+}
+else
+{
+    <br />
+    <br />
+    <h2>No hay partidos Para Finalizar</h2>
+}

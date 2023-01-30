@@ -1,0 +1,138 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Mundial</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-toggleable-md navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container ">
+                <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="Index">Mundial Qatar 2022</a> &nbsp; &nbsp;
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-lg-inline-flex flex-lg-row-reverse">
+                    <ul class="navbar-nav flex-grow-1 ">
+
+                        <li class="nav-item">
+                            <a class="btn btn-outline-info " asp-area="" asp-controller="Seleccion" asp-action="ListarSeleccionesConSusJugadores">Selecciones</a> &nbsp; &nbsp;
+                        </li>
+
+                        @if (Context.Session.GetString("rol") != null && Context.Session.GetString("rol") == "Periodista")
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info" asp-area="" asp-controller="Partido" asp-action="ListaPartidosJugados">Partidos finalizados</a>&nbsp; &nbsp;
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info" asp-area="" asp-controller="Periodista" asp-action="RealizarReseñaPartido">Realizar reseña</a> &nbsp; &nbsp;
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info" asp-area="" asp-controller="Periodista" asp-action="VerReseñas">Ver reseñas</a>&nbsp; &nbsp;
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-danger" asp-area="" asp-controller="Usuario" asp-action="Logout">Logout</a>&nbsp; &nbsp;
+                            </li>
+
+                        }
+                        else if (Context.Session.GetString("rol") != null && Context.Session.GetString("rol") == "Operador")
+                        {
+
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Estadisticas
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+
+                                        <li class="nav-item">
+                                            <a class="dropdown-item " asp-area="" asp-controller="Partido" asp-action="PartidosConTarjetaRojaDeUnPeriodita">Partidos con tarjetas roja reseñados por un periodista</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" asp-area="" asp-controller="Seleccion" asp-action="SeleccionConMasGoles">Seleccion/es goleadoras de la Copa del Mundo</a>
+                                        </li>
+                                    </ul>&nbsp; &nbsp;
+                                </div>
+
+                            </li>
+
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Partidos
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" asp-area="" asp-controller="Partido" asp-action="ListaPartidosJugados">Lista de partidos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" asp-area="" asp-controller="Partido" asp-action="FinalizarPartido">Finalizar partidos</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" asp-area="" asp-controller="Partido" asp-action="VisualizarPartidosJugadosEntreDosFechas">Partido entre dos fechas</a>
+                                        </li>
+                                    </ul>&nbsp;&nbsp;
+                                </div>
+
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info" asp-area="" asp-controller="Operador" asp-action="VerPeriodistas">Ver periodistas</a>  &nbsp; &nbsp;
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-outline-danger" asp-area="" asp-controller="Usuario" asp-action="Logout">Logout</a> &nbsp; &nbsp;
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-outline-primary" asp-area="" asp-controller="Usuario" asp-action="Login">Login</a> &nbsp; &nbsp;
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-primary" asp-area="" asp-controller="Usuario" asp-action="Registrarse">Registrarse</a> &nbsp; &nbsp;
+                            </li>
+
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <span class="d-sm-none">XS</span>
+            <span class="d-none d-sm-block d-md-none">SM</span>
+            <span class="d-none d-md-block d-lg-none">MD</span>
+            <span class="d-none d-lg-block d-xl-none">LG</span>
+            <span class="d-none d-xl-block d-xxl-none">XL</span>
+            <span class="d-none d-xxl-block">XXL</span>
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - Mundial - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

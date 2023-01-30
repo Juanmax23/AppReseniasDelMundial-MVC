@@ -1,0 +1,58 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "RealizarReseñaPartido";
+}
+
+<h1 class="text-center"><u>Realizar reseña de un partido</u></h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <h2 class="text-center">@ViewBag.Error</h2>
+    </div>
+}
+
+@if (ViewBag.Exito != null)
+{
+    <br />
+    <div class="alert alert-success">
+        <h2 class="text-center">@ViewBag.Exito</h2>
+    </div>
+}
+
+@if (ViewBag.RealizarReseñaPartido != null)
+{
+    <form method="post" action="~/Periodista/ProcesarReseña">
+
+
+        <div class="mb-3">
+            <label for="partido" class="col-form-label">Partido</label>
+            <select id="partido" name="partido" placeholder="Seleccione el partido" class="custom-select">
+                @if (ViewBag.RealizarReseñaPartido != null)
+                 {
+                    @foreach (Partido p in ViewBag.RealizarReseñaPartido)
+                     {
+                        <option value="@p.Id">@p.Seleccion1.NombrePais vs @p.Seleccion2.NombrePais</option>
+                     }
+                 }
+
+
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="titulo" class="col-form-label">Titulo</label>
+            <input type="text" id="titulo" name="titulo" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="contenido" class="col-form-label">Contenido</label>
+            <textarea id="contenido" name="contenido" class="form-control"></textarea>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Guardar reseña" />
+    </form>
+
+}
+
+

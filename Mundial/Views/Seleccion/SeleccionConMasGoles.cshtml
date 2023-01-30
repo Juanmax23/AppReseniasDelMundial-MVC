@@ -1,0 +1,24 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "SeleccionConMasGoles";
+}
+
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<h1>Seleccion/es goleadora/s </h1>
+
+@if (ViewBag.Estadisticas != null && ViewBag.Estadisticas.Count > 0)
+{
+    foreach (Seleccion s in ViewBag.Estadisticas)
+    {
+        <div class="alert alert-success">@s.NombrePais</div>
+    }
+}
+<br />
